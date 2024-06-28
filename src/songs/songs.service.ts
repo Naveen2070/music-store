@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class SongsService {
-  private readonly songs: Array<string> = [];
+  private readonly songs: Array<object> = [];
 
-  create(song) {
+  create(song: object) {
     this.songs.push(song);
     return this.songs;
   }
