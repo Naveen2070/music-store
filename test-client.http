@@ -1,0 +1,31 @@
+### Fetch root 
+GET http://localhost:3002
+
+### Fetch all songs
+GET http://localhost:3002/songs
+
+### Fetch A single songs
+GET http://localhost:3002/songs/1
+
+### Create a new song using POST method
+POST http://localhost:3002/songs
+Content-Type: application/json
+
+{
+  "title": "New Song Title",
+  "artist": "New Artist Name",
+  "duration": "New Duration"
+}
+
+### Update a song using PUT method
+PUT http://localhost:3002/songs/123
+Content-Type: application/json
+
+{
+  "title": "Updated Song Title",
+  "artist": "Updated Artist Name",
+  "duration": "Updated Duration"
+}
+
+### Delete a song using DELETE method
+DELETE http://localhost:3002/songs/123
