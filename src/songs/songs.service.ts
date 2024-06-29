@@ -10,6 +10,7 @@ export class SongsService {
   }
 
   findAll() {
+    // throw new Error('no found');
     return this.songs;
   }
 }
