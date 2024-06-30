@@ -13,7 +13,7 @@ Content-Type: application/json
 
 {
   "title": "One Love",
-  "artists": ["Blue"],
+  "artists": ["Blue","feat:blues"],
   "releaseDate":"2002-11-04",
   "duration": "03:27"
 }

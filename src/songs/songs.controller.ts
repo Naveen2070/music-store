@@ -5,6 +5,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -12,10 +13,16 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from 'src/dto/create-songs-dto';
+import { Connection } from 'src/misc/constants/connection';
 
 @Controller('songs')
 export class SongsController {
-  constructor(private readonly songsService: SongsService) {}
+  constructor(
+    private songsService: SongsService,
+    @Inject('CONNECTION') private connection: Connection,
+  ) {
+    console.log(this.connection);
+  }
 
   @Get()
   findAll() {
@@ -47,7 +54,7 @@ export class SongsController {
     )
     id: number,
   ) {
-    return `This action returns a song of id:${id}`;
+    return `This action returns a song of id:${id} of Type${typeof id}`;
   }
 
   @Put(':id')
