@@ -20,9 +20,7 @@ export class SongsController {
   constructor(
     private songsService: SongsService,
     @Inject('CONNECTION') private connection: Connection,
-  ) {
-    console.log(this.connection);
-  }
+  ) {}
 
   @Get()
   findAll() {

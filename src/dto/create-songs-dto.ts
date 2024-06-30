@@ -4,6 +4,7 @@ import {
   IsDateString,
   IsMilitaryTime,
   ArrayMinSize,
+  IsOptional,
 } from 'class-validator';
 
 export class CreateSongDTO {
@@ -23,4 +24,8 @@ export class CreateSongDTO {
   @IsMilitaryTime()
   @IsNotEmpty()
   readonly duration: Date;
+
+  @IsString()
+  @IsOptional()
+  readonly lyrics: string;
 }
