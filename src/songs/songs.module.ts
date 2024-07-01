@@ -1,27 +1,12 @@
 import { Module } from '@nestjs/common';
 import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
-import { connection } from 'src/misc/constants/connection';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Song } from './song.entity';
 
-// const stubSongService = {
-//   findAll: () => [{ id: 1, title: 'Song1', artists: ['Artist1'] }],
-// };
 @Module({
+  imports: [TypeOrmModule.forFeature([Song])],
   controllers: [SongsController],
-  providers: [
-    SongsService,
-    // {
-    //   provide: SongsService,
-    //   useClass: SongsService,
-    // },
-    // {
-    //   provide: SongsService,
-    //   useValue: stubSongService,
-    // },
-    {
-      provide: 'CONNECTION',
-      useValue: connection,
-    },
-  ],
+  providers: [SongsService],
 })
 export class SongsModule {}

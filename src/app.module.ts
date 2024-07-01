@@ -47,10 +47,6 @@ const prodConfig = { port: 4000 };
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(LoggerMiddleware).forRoutes('songs');
-    // consumer
-    //   .apply(LoggerMiddleware)
-    //   .forRoutes({ path: 'songs', method: RequestMethod.POST });
     consumer.apply(LoggerMiddleware).forRoutes(SongsController);
   }
   constructor(private dataSource: DataSource) {

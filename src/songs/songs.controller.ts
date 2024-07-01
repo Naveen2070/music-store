@@ -5,7 +5,6 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Inject,
   Param,
   ParseIntPipe,
   Post,
@@ -13,17 +12,15 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from 'src/dto/create-songs-dto';
-import { Connection } from 'src/misc/constants/connection';
+import { Song } from './song.entity';
+import { DeleteResult } from 'typeorm';
 
 @Controller('songs')
 export class SongsController {
-  constructor(
-    private songsService: SongsService,
-    @Inject('CONNECTION') private connection: Connection,
-  ) {}
+  constructor(private songsService: SongsService) {}
 
   @Get()
-  findAll() {
+  findAll(): Promise<Song[]> {
     try {
       return this.songsService.findAll();
     } catch (e) {
@@ -38,7 +35,7 @@ export class SongsController {
   }
 
   @Post()
-  create(@Body() createSongDTO: CreateSongDTO) {
+  create(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }
 
@@ -51,17 +48,34 @@ export class SongsController {
       }),
     )
     id: number,
-  ) {
-    return `This action returns a song of id:${id} of Type${typeof id}`;
+  ): Promise<Song> {
+    return this.songsService.findOne(id);
   }
 
   @Put(':id')
-  update() {
-    return 'This action updates a song';
+  update(
+    @Param(
+      'id',
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE,
+      }),
+    )
+    id: number,
+    @Body() createSongDTO: CreateSongDTO,
+  ): Promise<Song> {
+    return this.songsService.update(id, createSongDTO);
   }
 
   @Delete(':id')
-  remove() {
-    return 'This action removes a song';
+  delete(
+    @Param(
+      'id',
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE,
+      }),
+    )
+    id: number,
+  ): Promise<DeleteResult> {
+    return this.songsService.remove(id);
   }
 }
