@@ -14,7 +14,7 @@ Content-Type: application/json
 {
   "title": "One Love",
   "artists": ["Blue","feat:blues"],
-  "releaseDate":"2002-11-04",
+  "releasedDate":"2002-11-04",
   "duration": "03:27",
   "lyrics":"One love, one heartLet's join together and a-feel alright One love (oh Lord of mercy) One heart (I tell you) Let's join together (at this house I pray) And a-feel alright (and I will feel alright) Let's join together and a-feel alright Now, let them all pass all their dirty remarks (one love) There is one question I'd really like to ask (one soul) Is there a place for the hopeless sinner Who has hurt all mankind just to save his own? One love, one heart Let's join together and a-feel alright One love (hear my plea) One heart Let's join together and a-feel alright Let's join together (let's just trust in the Lord) And a-feel alright (and I will feel alright) Let's join together to fight this holy battle So when the man comes there will be no, no doom Have pity on those whose chances grows thinner There ain't no hiding place among the kingdoms of love, yes One love (hear my plea) One heart (oh) Let's join together and a-feel alright One love (oh Lord of mercy) One heart (I tell you) Let's join together (let this house a-pray) And a-feel alright (and I will feel alright) Let's join together and a-feel alright One love, one heart Let's join together and a-feel alright One love (oh Lord) One heart (oh Lord) Let's join together and a-feel alright Let's join together (let's all pray to the Lord) And a-feel alright (and I will feel alright) I tell you, let them all pass all their dirty remarks (one love) There is one question I'd really like to ask (one soul) Is there a place for the hopeless sinner Who has hurt all mankind just to save his own? One love (oh Lord of mercy) One heart (I tell you) Let's join together (at this house I pray) And a-feel alright (and I will feel alright) One love (hear my plea) One heart (hear my plea) Let's join together and a-feel alright (and I will feel alright) Let's join together (let us pray to the Lord) And a-feel alright (and I will feel alright)"
 }
@@ -26,10 +26,10 @@ Content-Type: application/json
 {
   "title": "One Love",
   "artists": ["Blue","feat:blues"],
-  "releaseDate":"2002-11-04",
+  "releasedDate":"2002-11-04",
   "duration": "03:27",
-  "lyrics":"One love, one heartLet's join together and a-feel alright On",
-  }
+  "lyrics": "one"
+}
 
 ### Delete a song using DELETE method
 DELETE http://localhost:3002/songs/1
