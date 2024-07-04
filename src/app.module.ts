@@ -13,6 +13,8 @@ import { DevConfigService } from './providers/devConfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Song } from './songs/song.entity';
+import { Artist } from './artists/artist.entity';
+import { User } from './users/user.entity';
 
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
@@ -26,7 +28,7 @@ const prodConfig = { port: 4000 };
       username: 'postgres',
       password: 'naveen2007',
       database: 'spotifyClone',
-      entities: [Song],
+      entities: [Song, Artist, User],
       synchronize: true,
     }),
     SongsModule,

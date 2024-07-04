@@ -3,8 +3,8 @@ import {
   IsNotEmpty,
   IsDateString,
   IsMilitaryTime,
-  ArrayMinSize,
   IsOptional,
+  IsNumber,
 } from 'class-validator';
 
 export class CreateSongDTO {
@@ -13,9 +13,8 @@ export class CreateSongDTO {
   readonly title: string;
 
   @IsNotEmpty()
-  @ArrayMinSize(1)
-  @IsString({ each: true })
-  readonly artists: string[];
+  @IsNumber({}, { each: true })
+  readonly artists;
 
   @IsNotEmpty()
   @IsDateString()
