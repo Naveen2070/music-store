@@ -22,7 +22,7 @@ export class SongsService {
 
   private readonly songs: Array<object> = [];
 
-  create(songDTO: CreateSongDTO): Promise<Song> {
+  async create(songDTO: CreateSongDTO): Promise<Song> {
     const song = new Song();
     song.title = songDTO.title;
     song.artists = songDTO.artists;
@@ -30,7 +30,7 @@ export class SongsService {
     song.duration = songDTO.duration;
     song.lyrics = songDTO.lyrics;
 
-    const artists = this.artistsRepository.findBy({
+    const artists = await this.artistsRepository.findBy({
       id: In(songDTO.artists),
     });
 

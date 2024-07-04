@@ -5,6 +5,7 @@ import {
   IsOptional,
   IsNumber,
 } from 'class-validator';
+import { Artist } from 'src/artists/artist.entity';
 
 export class UpdateSongDTO {
   @IsString()
@@ -13,7 +14,7 @@ export class UpdateSongDTO {
 
   @IsNumber({}, { each: true })
   @IsOptional()
-  readonly artists;
+  readonly artists: Artist[];
 
   @IsDateString()
   @IsOptional()
