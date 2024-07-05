@@ -10,9 +10,10 @@ import {
   Put,
 } from '@nestjs/common';
 import { PlayListsService } from './playlists.service';
-import { CreatePlayListDto } from 'src/dto/playlists/create-playlist.dto';
-import { Playlist } from 'src/entity/playlist.entity';
+import { CreatePlayListDto } from 'src/playlists/dto/create-playlist.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { Playlist } from './entity/playlist.entity';
+import { Song } from 'src/songs/entity/song.entity';
 
 @Controller('playlists')
 export class PlayListsController {
@@ -68,5 +69,18 @@ export class PlayListsController {
     @Body() playlistDTO: CreatePlayListDto,
   ): Promise<UpdateResult> {
     return this.playListService.update(id, playlistDTO);
+  }
+
+  @Get(':id/songs')
+  getSongsByPlaylist(
+    @Param(
+      'id',
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE,
+      }),
+    )
+    id: number,
+  ): Promise<Song[]> {
+    return this.playListService.getSongsByPlaylist(id);
   }
 }

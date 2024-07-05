@@ -12,10 +12,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
-import { CreateSongDTO } from 'src/dto/songs/create-songs-dto';
-import { Song } from '../entity/song.entity';
+import { CreateSongDTO } from 'src/songs/dto/create-songs-dto';
+import { Song } from './entity/song.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
-import { UpdateSongDTO } from 'src/dto/songs/update-songs-dto';
+import { UpdateSongDTO } from 'src/songs/dto/update-songs-dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
 
 @Controller('songs')

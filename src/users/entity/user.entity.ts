@@ -1,4 +1,4 @@
-import { Playlist } from './playlist.entity';
+import { Playlist } from 'src/playlists/entity/playlist.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('users')

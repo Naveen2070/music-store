@@ -1,11 +1,12 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { Playlist } from 'src/entity/playlist.entity';
 import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
-import { Song } from 'src/entity/song.entity';
-import { User } from 'src/entity/user.entity';
-import { CreatePlayListDto } from 'src/dto/playlists/create-playlist.dto';
-import { UpdatePlayListDto } from 'src/dto/playlists/update-playlist.dto';
+import { CreatePlayListDto } from 'src/playlists/dto/create-playlist.dto';
+import { UpdatePlayListDto } from 'src/playlists/dto/update-playlist.dto';
+import { Playlist } from './entity/playlist.entity';
+import { Song } from 'src/songs/entity/song.entity';
+import { User } from 'src/users/entity/user.entity';
+
 @Injectable()
 export class PlayListsService {
   constructor(
@@ -55,5 +56,16 @@ export class PlayListsService {
     const playList = await this.playListRepo.findOneBy({ id });
     playList.name = playListDTO.name;
     return this.playListRepo.update(id, playList);
+  }
+
+  async getSongsByPlaylist(id: number): Promise<Song[]> {
+    const playList = await this.playListRepo.findOne({
+      where: { id },
+      relations: ['songs'],
+    });
+    if (!playList) {
+      throw new Error('Playlist not found');
+    }
+    return playList.songs;
   }
 }
