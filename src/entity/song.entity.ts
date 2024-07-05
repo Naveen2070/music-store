@@ -1,5 +1,5 @@
-import { Artist } from 'src/artists/artist.entity';
-// import { Playlist } from 'src/playlists/playlist.entity';
+import { Artist } from './artist.entity';
+import { Playlist } from './playlist.entity';
 import {
   Column,
   Entity,
@@ -30,6 +30,6 @@ export class Song {
   @JoinTable({ name: 'songs_artists' })
   artists: Artist[];
 
-  // @ManyToOne(() => Playlist, (playList) => playList.songs)
-  // playList: Playlist;
+  @ManyToOne(() => Playlist, (playList) => playList.songs)
+  playList: Playlist;
 }

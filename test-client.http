@@ -33,3 +33,32 @@ Content-Type: application/json
 
 ### Delete a song using DELETE method
 DELETE http://localhost:3002/songs/1
+
+### Add Playlist
+POST http://localhost:3002/playlists
+Content-Type: application/json
+
+{
+  "name": "My Playlist",
+  "songs": [1, 2],
+  "user": 1
+}
+
+### Get all playlists
+GET http://localhost:3002/playlists
+
+### Get a single playlist
+GET http://localhost:3002/playlists/1
+
+### Update a playlist
+PUT http://localhost:3002/playlists/1
+Content-Type: application/json
+
+{
+  "name": "My Updated Playlist",
+  "songs": [1, 2],
+  "user": 1
+}
+
+### Delete a playlist
+DELETE http://localhost:3002/playlists/1

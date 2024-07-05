@@ -9,12 +9,14 @@ import { AppService } from './app.service';
 import { SongsModule } from './songs/songs.module';
 import { LoggerMiddleware } from './middleware/logger/logger.middleware';
 import { SongsController } from './songs/songs.controller';
-import { DevConfigService } from './providers/devConfig';
+import { DevConfigService } from './misc/providers/devConfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { Song } from './songs/song.entity';
-import { Artist } from './artists/artist.entity';
-import { User } from './users/user.entity';
+import { Song } from './entity/song.entity';
+import { Artist } from './entity/artist.entity';
+import { User } from './entity/user.entity';
+import { Playlist } from './entity/playlist.entity';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
@@ -28,10 +30,11 @@ const prodConfig = { port: 4000 };
       username: 'postgres',
       password: 'naveen2007',
       database: 'spotifyClone',
-      entities: [Song, Artist, User],
+      entities: [Song, Artist, User, Playlist],
       synchronize: true,
     }),
     SongsModule,
+    PlaylistsModule,
   ],
   controllers: [AppController],
   providers: [

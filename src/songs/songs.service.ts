@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
-import { Song } from './song.entity';
+import { Song } from '../entity/song.entity';
 import { CreateSongDTO } from 'src/dto/songs/create-songs-dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateSongDTO } from 'src/dto/songs/update-songs-dto';
@@ -9,7 +9,7 @@ import {
   IPaginationOptions,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import { Artist } from 'src/artists/artist.entity';
+import { Artist } from '../entity/artist.entity';
 
 @Injectable()
 export class SongsService {

@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DevConfigService } from './providers/devConfig';
+import { DevConfigService } from './misc/providers/devConfig';
 
 @Injectable()
 export class AppService {
