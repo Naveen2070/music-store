@@ -68,3 +68,27 @@ DELETE http://localhost:3002/playlists/1
 GET http://localhost:3002/playlists/1/songs
 
 ###---------------------------------------------- Auth Routes -------------------------------------###
+
+### Login
+POST http://localhost:3002/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin"
+}
+
+### signup
+POST http://localhost:3002/auth/signup
+Content-Type: application/json
+
+{
+  "firstName": "admin",
+  "lastName": "doe",
+  "email": "admin@gmail.com",
+  "password": "admin@123"
+}
+
+### Logout
+POST http://localhost:3002/auth/logout  
+
