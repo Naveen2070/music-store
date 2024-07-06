@@ -3,10 +3,18 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
 import { JwtModule } from '@nestjs/jwt';
+import { authKey } from 'src/common/constants/auth.constants';
+import { JwtStrategy } from 'src/common/middleware/jwt/jwt-strategy';
 
 @Module({
-  imports: [UsersModule, JwtModule.register({ secret: 'naveen@secret#321' })],
-  providers: [AuthService],
+  imports: [
+    UsersModule,
+    JwtModule.register({
+      secret: authKey.SECRET_KEY,
+      signOptions: { expiresIn: authKey.EXPIRES_IN },
+    }),
+  ],
+  providers: [AuthService, JwtStrategy],
   controllers: [AuthController],
   exports: [AuthService],
 })

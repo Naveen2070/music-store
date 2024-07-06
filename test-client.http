@@ -92,3 +92,10 @@ Content-Type: application/json
 ### Logout
 POST http://localhost:3002/auth/logout  
 
+### Get current user profile
+GET http://localhost:3002/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiaWF0IjoxNzIwMjgwNTk4LCJleHAiOjE3MjAzNjY5OTh9.UGbD2tsQ7ICbjrdoBUtchedwz7cqgzc7aS41YDlTN_E
+
+
+###---------------------------------------------- Misc Routes -------------------------------------###
+
