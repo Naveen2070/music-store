@@ -10,6 +10,7 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDTO } from 'src/songs/dto/create-songs-dto';
@@ -17,6 +18,7 @@ import { Song } from './entity/song.entity';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { UpdateSongDTO } from 'src/songs/dto/update-songs-dto';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { ArtistJwtGuard } from 'src/common/middleware/jwt/artists-jwt-gurad';
 
 @Controller('songs')
 export class SongsController {
@@ -34,6 +36,7 @@ export class SongsController {
   }
 
   @Post()
+  @UseGuards(ArtistJwtGuard)
   create(@Body() createSongDTO: CreateSongDTO): Promise<Song> {
     return this.songsService.create(createSongDTO);
   }

@@ -27,16 +27,16 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(
-  //   @Param(
-  //     'id',
-  //     new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
-  //   )
-  //   id: number,
-  // ) {
-  //   return this.usersService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return this.usersService.findOneById(+id);
+  }
 
   @Patch(':id')
   update(

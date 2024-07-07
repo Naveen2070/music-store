@@ -10,5 +10,6 @@ import { User } from '../users/entity/user.entity';
   imports: [TypeOrmModule.forFeature([Song, Artist, User])],
   controllers: [SongsController],
   providers: [SongsService],
+  exports: [SongsService, TypeOrmModule],
 })
 export class SongsModule {}
