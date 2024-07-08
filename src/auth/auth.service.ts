@@ -55,7 +55,7 @@ export class AuthService {
       enable2FA: true,
     };
     await this.usersService.update(user.id, payload);
-    return { secret: user.twoFASecret };
+    return { secret: secret.base32 };
   }
 
   async validateTwoFactorAuthentication(

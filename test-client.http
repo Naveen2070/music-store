@@ -9,7 +9,7 @@ GET http://localhost:3002/songs/1
 ### Create a new song using POST method
 POST http://localhost:3002/songs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjMsImlhdCI6MTcyMDM1MDEwMywiZXhwIjoxNzIwNDM2NTAzfQ.8FqKFeFp9fInAxYR8070bNRh2tv8TVPDwlNbHRLOzmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjQsImlhdCI6MTcyMDQxMTY2NiwiZXhwIjoxNzIwNDk4MDY2fQ.6fhssvecvPtCPNekG-Q8E3ib7d63bfxv2gI7uD_Ri6Y
 
 {
   "title": "Hey Jude",
@@ -103,23 +103,23 @@ POST http://localhost:3002/auth/logout
 
 ### Get current user profile
 GET http://localhost:3002/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjMsImlhdCI6MTcyMDM1MDEwMywiZXhwIjoxNzIwNDM2NTAzfQ.8FqKFeFp9fInAxYR8070bNRh2tv8TVPDwlNbHRLOzmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjQsImlhdCI6MTcyMDQxMTY2NiwiZXhwIjoxNzIwNDk4MDY2fQ.6fhssvecvPtCPNekG-Q8E3ib7d63bfxv2gI7uD_Ri6Y
 
 ### enable 2FA
 GET  http://localhost:3002/auth/enable2fa
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjMsImlhdCI6MTcyMDM1MDEwMywiZXhwIjoxNzIwNDM2NTAzfQ.8FqKFeFp9fInAxYR8070bNRh2tv8TVPDwlNbHRLOzmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjQsImlhdCI6MTcyMDQxMTY2NiwiZXhwIjoxNzIwNDk4MDY2fQ.6fhssvecvPtCPNekG-Q8E3ib7d63bfxv2gI7uD_Ri6Y
 
 ### disable 2FA
 GET  http://localhost:3002/auth/disable2fa
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjMsImlhdCI6MTcyMDM1MDEwMywiZXhwIjoxNzIwNDM2NTAzfQ.8FqKFeFp9fInAxYR8070bNRh2tv8TVPDwlNbHRLOzmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjQsImlhdCI6MTcyMDQxMTY2NiwiZXhwIjoxNzIwNDk4MDY2fQ.6fhssvecvPtCPNekG-Q8E3ib7d63bfxv2gI7uD_Ri6Y
 
 ### validate 2FA
 POST http://localhost:3002/auth/validate2fa
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjMsImlhdCI6MTcyMDM1MDEwMywiZXhwIjoxNzIwNDM2NTAzfQ.8FqKFeFp9fInAxYR8070bNRh2tv8TVPDwlNbHRLOzmU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsInN1YiI6NiwiYXJ0aXN0SWQiOjQsImlhdCI6MTcyMDQxMTY2NiwiZXhwIjoxNzIwNDk4MDY2fQ.6fhssvecvPtCPNekG-Q8E3ib7d63bfxv2gI7uD_Ri6Y
 
 {
-"token":"767763"
+"token":"207368"
 }
 
 ###---------------------------------------------- Artists Routes -------------------------------------###
