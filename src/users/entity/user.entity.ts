@@ -20,6 +20,9 @@ export class User {
   @Exclude()
   password: string;
 
+  @Column()
+  apiKey: string;
+
   @Column({ nullable: true, type: 'text' })
   twoFASecret: string;
 

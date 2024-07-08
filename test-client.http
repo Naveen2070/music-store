@@ -122,6 +122,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQ
 "token":"207368"
 }
 
+### validate with API key
+GET  http://localhost:3002/auth/profile
+Authorization: Bearer d09cca88-2af4-4eb1-8b18-d9d67beb17e5
+
 ###---------------------------------------------- Artists Routes -------------------------------------###
 
 ### Fetch all artists

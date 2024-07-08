@@ -25,6 +25,10 @@ export class CreateUserDTO {
 
   @IsString()
   @IsOptional()
+  apiKey: string;
+
+  @IsString()
+  @IsOptional()
   twoFASecret?: string;
 
   @IsBoolean()

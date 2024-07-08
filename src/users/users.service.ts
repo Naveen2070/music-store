@@ -6,6 +6,7 @@ import { User } from './entity/user.entity';
 import { Repository, UpdateResult } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { LoginDTO } from 'src/auth/dto/login.dto';
+import { v4 as uuid4 } from 'uuid';
 
 @Injectable()
 export class UsersService {
@@ -17,9 +18,12 @@ export class UsersService {
   async create(createUserDto: CreateUserDTO) {
     const salt = await bcrypt.genSalt();
     createUserDto.password = await bcrypt.hash(createUserDto.password, salt);
-    const user = await this.usersRepository.save(createUserDto);
-    delete user.password;
-    return user;
+    createUserDto.apiKey = uuid4();
+    const user = new User();
+    Object.assign(user, createUserDto);
+    const userData = await this.usersRepository.save(user);
+    delete userData.password;
+    return userData;
   }
 
   findAll() {
@@ -39,6 +43,10 @@ export class UsersService {
 
   findOneById(id: number) {
     return this.usersRepository.findOneBy({ id });
+  }
+
+  findOneByApiKey(apiKey: string) {
+    return this.usersRepository.findOneBy({ apiKey });
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
