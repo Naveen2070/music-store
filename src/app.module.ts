@@ -12,18 +12,22 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ArtistsModule } from './artists/artists.module';
 import { dataSourceOptions } from './db/data.source';
+import { SeedModule } from './seed/seed.module';
+import { ConfigModule } from '@nestjs/config';
 
 const devConfig = { port: 3000 };
 const prodConfig = { port: 4000 };
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot(dataSourceOptions),
     SongsModule,
     PlaylistsModule,
     UsersModule,
     AuthModule,
     ArtistsModule,
+    SeedModule,
   ],
   controllers: [AppController],
   providers: [
@@ -44,6 +48,6 @@ export class AppModule implements NestModule {
     consumer.apply(LoggerMiddleware).forRoutes(SongsController);
   }
   constructor(private dataSource: DataSource) {
-    console.log(dataSource.driver.database);
+    console.log('Database: ', dataSource.driver.database);
   }
 }
