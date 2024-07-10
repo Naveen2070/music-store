@@ -8,8 +8,10 @@ import { Enable2FAType } from 'src/common/types/2FA.types';
 import { ValidateTokenDTO } from './dto/validateToken.dto';
 import { UpdateResult } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(
     private userService: UsersService,
@@ -17,6 +19,11 @@ export class AuthController {
   ) {}
 
   @Post('signup')
+  @ApiOperation({ summary: 'Sign up a new user' })
+  @ApiResponse({
+    status: 201,
+    description: 'The signed up user details are returned.',
+  })
   signup(
     @Body()
     CreateUserDTO: CreateUserDTO,
@@ -25,6 +32,11 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiOperation({ summary: 'Login a user' })
+  @ApiResponse({
+    status: 201,
+    description: 'The login user details are returned if login is successful.',
+  })
   login(
     @Body()
     loginDTO: LoginDTO,
@@ -34,6 +46,11 @@ export class AuthController {
 
   @Get('enable2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Enable 2FA for a user' })
+  @ApiResponse({
+    status: 201,
+    description: 'The 2FA secret is returned.',
+  })
   enableTwoFactorAuthentication(
     @Req()
     req,
@@ -43,6 +60,11 @@ export class AuthController {
 
   @Post('validate2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Validate 2FA token for a user' })
+  @ApiResponse({
+    status: 201,
+    description: 'The validation result is returned.',
+  })
   async validateTwoFactorAuthentication(
     @Req()
     req,
@@ -57,6 +79,11 @@ export class AuthController {
 
   @Get('disable2fa')
   @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Disable 2FA for a user' })
+  @ApiResponse({
+    status: 201,
+    description: 'The update result is returned.',
+  })
   disable2FA(
     @Req()
     req,
@@ -66,6 +93,11 @@ export class AuthController {
 
   @Get('profile')
   @UseGuards(AuthGuard('bearer'))
+  @ApiOperation({ summary: 'Get profile of a user with API key' })
+  @ApiResponse({
+    status: 201,
+    description: 'The profile of a user is returned if API key is valid.',
+  })
   getProfile(@Req() req) {
     delete req.user.password;
     return {

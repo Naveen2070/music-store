@@ -3,6 +3,10 @@ import {
   TypeOrmModuleAsyncOptions,
   TypeOrmModuleOptions,
 } from '@nestjs/typeorm';
+import { Artist } from 'src/artists/entity/artist.entity';
+import { Playlist } from 'src/playlists/entity/playlist.entity';
+import { Song } from 'src/songs/entity/song.entity';
+import { User } from 'src/users/entity/user.entity';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
 export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
@@ -18,7 +22,7 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: configService.get<string>('dbUser'),
       database: configService.get<string>('dbName'),
       password: configService.get<string>('dbPassword'),
-      entities: ['dist/**/*.entity.js'],
+      entities: [User, Playlist, Artist, Song],
       synchronize: false,
       migrations: ['dist/db/migrations/*.js'],
     };
@@ -27,11 +31,11 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT),
-  username: process.env.DB_USER,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
+  host: process.env.DBHOST,
+  port: parseInt(process.env.DBPORT),
+  username: process.env.DBUSER,
+  database: process.env.DBNAME,
+  password: process.env.DBPASSWORD,
   entities: ['dist/**/*.entity.js'],
   synchronize: false,
   migrations: ['dist/db/migrations/*.js'],
