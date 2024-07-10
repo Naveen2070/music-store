@@ -24,7 +24,7 @@ const prodConfig = { port: 4000 };
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: [`.env.${process.env.NODE_ENV || 'development'}`],
+      envFilePath: ['.env.development', '.env.production'],
       load: [nestConfiguration],
       validate: validate,
     }),

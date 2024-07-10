@@ -1,3 +1,13 @@
+import * as dotenv from 'dotenv';
+import { join } from 'path';
+
+// Load environment variables based on NODE_ENV
+const envFile =
+  process.env.NODE_ENV === 'production'
+    ? '.env.production'
+    : '.env.development';
+dotenv.config({ path: join(__dirname, '..', '..', envFile) });
+
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import {
   TypeOrmModuleAsyncOptions,
@@ -15,13 +25,19 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
   useFactory: async (
     configService: ConfigService,
   ): Promise<TypeOrmModuleOptions> => {
+    const dbHost = configService.get<string>('DBHOST');
+    const dbPort = configService.get<number>('DBPORT');
+    const dbUser = configService.get<string>('DBUSER');
+    const dbPassword = configService.get<string>('DBPASSWORD');
+    const dbName = configService.get<string>('DBNAME');
+
     return {
       type: 'postgres',
-      host: configService.get<string>('dbHost'),
-      port: configService.get<number>('dbPort'),
-      username: configService.get<string>('dbUser'),
-      database: configService.get<string>('dbName'),
-      password: configService.get<string>('dbPassword'),
+      host: dbHost,
+      port: dbPort,
+      username: dbUser,
+      password: dbPassword,
+      database: dbName,
       entities: [User, Playlist, Artist, Song],
       synchronize: false,
       migrations: ['dist/db/migrations/*.js'],

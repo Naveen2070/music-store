@@ -1,8 +1,10 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { ArtistsService } from './artists.service';
 import { CreateArtistDTO } from './dto/create-artists.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('artists')
+@ApiTags('Artists')
 export class ArtistsController {
   constructor(private readonly artistsService: ArtistsService) {}
 

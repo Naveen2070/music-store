@@ -14,8 +14,10 @@ import { CreatePlayListDto } from 'src/playlists/dto/create-playlist.dto';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { Playlist } from './entity/playlist.entity';
 import { Song } from 'src/songs/entity/song.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('playlists')
+@ApiTags('PlayLists')
 export class PlayListsController {
   constructor(private playListService: PlayListsService) {}
   @Post()
