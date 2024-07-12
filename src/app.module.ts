@@ -6,7 +6,6 @@ import { LoggerMiddleware } from './common/middleware/logger/logger.middleware';
 import { SongsController } from './songs/songs.controller';
 import { DevConfigService } from './common/providers/devConfig';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { DataSource } from 'typeorm';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -24,7 +23,9 @@ const prodConfig = { port: 4000 };
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env.development', '.env.production'],
+      envFilePath: [
+        `${process.cwd()}/.env.${process.env.NODE_ENV || 'development'}`,
+      ],
       load: [nestConfiguration],
       validate: validate,
     }),
@@ -53,8 +54,5 @@ const prodConfig = { port: 4000 };
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes(SongsController);
-  }
-  constructor(private dataSource: DataSource) {
-    console.log('Database: ', dataSource.driver.database);
   }
 }
