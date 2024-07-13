@@ -22,7 +22,7 @@ describe('SongController', () => {
               return [{ id: 1, title: 'Dancing Feat' }];
             }),
             findOne: jest.fn().mockImplementation((id) => {
-              return { id, title: 'Dancing Feat' };
+              return { id, title: 'Dancing Feats' };
             }),
             update: jest.fn().mockImplementation((id, updateSongDTO) => {
               return { id, ...updateSongDTO };
@@ -59,7 +59,7 @@ describe('SongController', () => {
     describe('findAll', () => {
       it('should return an array of songs', async () => {
         expect(await controller.findAll()).toEqual([
-          { id: 1, title: 'Dancing Feat' },
+          { id: 1, title: 'Dancing Feats' },
         ]);
       });
     });
@@ -68,7 +68,7 @@ describe('SongController', () => {
       it('should return a song', async () => {
         expect(await controller.find(1)).toEqual({
           id: 1,
-          title: 'Dancing Feat',
+          title: 'Dancing Feats',
         });
       });
     });
@@ -76,7 +76,7 @@ describe('SongController', () => {
     describe('update', () => {
       it('should return an updated song', async () => {
         const updateSongDTO: UpdateSongDTO = {
-          title: 'Dancing Feat',
+          title: 'Dancing Feats',
           artists: [],
           releasedDate: undefined,
           duration: undefined,

@@ -1,5 +1,5 @@
 import { Playlist } from 'src/playlists/entity/playlist.entity';
-import { Artist } from '../../artists/entity/artist.entity';
+import { Artist } from 'src/artists/entity/artist.entity';
 import {
   Column,
   Entity,
