@@ -6,6 +6,9 @@ import { Song } from '../../src/songs/entity/song.entity';
 import { SongsModule } from '../../src/songs/songs.module';
 import { CreateSongDTO } from '../../src/songs/dto/create-songs-dto';
 import { UpdateSongDTO } from '../../src/songs/dto/update-songs-dto';
+import { Artist } from '../../src/artists/entity/artist.entity';
+import { User } from '../../src/users/entity/user.entity';
+import { Playlist } from '../../src/playlists/entity/playlist.entity';
 
 describe('Songs - /songs', () => {
   let app: INestApplication;
@@ -15,9 +18,13 @@ describe('Songs - /songs', () => {
       imports: [
         TypeOrmModule.forRoot({
           type: 'postgres',
-          url: 'postgres://postgres:naveen2007@localhost:5432/spotifyClone',
+          host: 'localhost',
+          port: 5432,
+          username: 'postgres',
+          password: 'naveen2007',
+          database: 'spotifyClone',
           synchronize: true,
-          entities: [Song],
+          entities: [Song, Artist, User, Playlist],
           dropSchema: true,
         }),
         SongsModule,
@@ -26,13 +33,13 @@ describe('Songs - /songs', () => {
 
     app = moduleRef.createNestApplication();
     await app.init();
-  });
+  }, 60000);
 
   afterEach(async () => {
     // Fetch all the entities
     const songRepository = app.get('SongRepository');
     await songRepository.clear();
-  });
+  }, 10000);
 
   const createSong = (createSongDTO: CreateSongDTO): Promise<Song> => {
     const song = new Song();
@@ -40,6 +47,20 @@ describe('Songs - /songs', () => {
     const songRepo = app.get('SongRepository');
     return songRepo.save(song);
   };
+
+  it('/POST songs', async () => {
+    const createSongDTO = {
+      title: 'Hey Jude',
+      releasedDate: '1968-08-26',
+      duration: '07:11',
+      lyrics: "Hey Jude, don't make",
+    };
+    const results = await request(app.getHttpServer())
+      .post(`/songs`)
+      .send(createSongDTO);
+    expect(results.status).toBe(201);
+    expect(results.body.title).toBe('Animals');
+  });
 
   it(`/GET songs`, async () => {
     const newSong = await createSong({
@@ -90,15 +111,6 @@ describe('Songs - /songs', () => {
       .send(updateSongDTO as UpdateSongDTO);
     expect(results.statusCode).toBe(200);
     expect(results.body.affected).toEqual(1);
-  });
-
-  it('/POST songs', async () => {
-    const createSongDTO = { title: 'Animals' };
-    const results = await request(app.getHttpServer())
-      .post(`/songs`)
-      .send(createSongDTO as CreateSongDTO);
-    expect(results.status).toBe(201);
-    expect(results.body.title).toBe('Animals');
   });
 
   it('/DELETE songs', async () => {
