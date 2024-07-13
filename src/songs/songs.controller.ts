@@ -44,7 +44,7 @@ export class SongsController {
   }
 
   @Get(':id')
-  find(
+  findOne(
     @Param(
       'id',
       new ParseIntPipe({
@@ -71,7 +71,7 @@ export class SongsController {
   }
 
   @Delete(':id')
-  delete(
+  remove(
     @Param(
       'id',
       new ParseIntPipe({
