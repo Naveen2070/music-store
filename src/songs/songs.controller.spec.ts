@@ -16,10 +16,16 @@ describe('SongController', () => {
           provide: SongsService,
           useValue: {
             create: jest.fn().mockImplementation((createSongDTO) => {
-              return { id: 'a uuid', ...createSongDTO };
+              return { id: 1, ...createSongDTO };
             }),
-            findAll: jest.fn().mockImplementation(() => {
-              return [{ id: 1, title: 'Dancing Feat' }];
+            paginate: jest.fn().mockImplementation(({ page, limit }) => {
+              const data = [{ id: 1, title: 'Dancing Feat' }];
+              return {
+                data,
+                page,
+                limit,
+                totalCount: data.length,
+              };
             }),
             findOne: jest.fn().mockImplementation((id) => {
               return { id, title: 'Dancing Feat' };
@@ -43,7 +49,7 @@ describe('SongController', () => {
   });
 
   describe('create', () => {
-    it('should return a new song', async () => {
+    it('should return a new created song', async () => {
       const newSongDTO: CreateSongDTO = {
         title: 'Runaway',
         artists: [],
@@ -53,45 +59,52 @@ describe('SongController', () => {
       };
       const song = await controller.create(newSongDTO);
       expect(song.title).toBe('Runaway');
-      expect(song).toEqual({ id: 'a uuid', title: 'Runaway' });
+      expect(song).toEqual({ id: 1, ...newSongDTO });
     });
+  });
 
-    describe('findAll', () => {
-      it('should return an array of songs', async () => {
-        expect(await controller.findAll()).toEqual([
-          { id: 1, title: 'Dancing Feat' },
-        ]);
+  describe('findAll', () => {
+    it('should return a paginated result of songs', async () => {
+      const page = 1;
+      const limit = 10;
+      const result = await controller.findAll(page, limit);
+      expect(result).toEqual({
+        data: [{ id: 1, title: 'Dancing Feat' }],
+        page,
+        limit,
+        totalCount: 1,
       });
     });
+  });
 
-    describe('findOne', () => {
-      it('should return a song', async () => {
-        expect(await controller.find(1)).toEqual({
-          id: 1,
-          title: 'Dancing Feat',
-        });
+  describe('findOne', () => {
+    it('should return a song by id', async () => {
+      expect(await controller.findOne(1)).toEqual({
+        id: 1,
+        title: 'Dancing Feat',
       });
     });
+  });
 
-    describe('update', () => {
-      it('should return an updated song', async () => {
-        const updateSongDTO: UpdateSongDTO = {
-          title: 'Dancing Feat',
-          artists: [],
-          releasedDate: undefined,
-          duration: undefined,
-          lyrics: '',
-        };
-        expect(await controller.update(1, updateSongDTO)).toEqual({
-          id: 1,
-          ...updateSongDTO,
-        });
+  describe('update', () => {
+    it('should return an updated song by id', async () => {
+      const updateSongDTO: UpdateSongDTO = {
+        title: 'Dancing Feat',
+        artists: [],
+        releasedDate: undefined,
+        duration: undefined,
+        lyrics: '',
+      };
+      expect(await controller.update(1, updateSongDTO)).toEqual({
+        id: 1,
+        ...updateSongDTO,
       });
     });
-    describe('remove', () => {
-      it('should return a removed song', async () => {
-        expect(await controller.delete(1)).toEqual({ id: 1 });
-      });
+  });
+
+  describe('remove', () => {
+    it('should return a removed song by id', async () => {
+      expect(await controller.remove(1)).toEqual({ id: 1 });
     });
   });
 });
